@@ -1,0 +1,42 @@
+<ng-container [ngTemplateOutlet]="Authors[0]"></ng-container>
+<ng-container [ngTemplateOutlet]="Authors[1]"></ng-container>
+<ng-container [ngTemplateOutlet]="Authors[2]"></ng-container>
+
+<ng-template #Author>
+  <h3>{{ (selectedAuthor.id ? '::Edit' : '::NewBook' ) | abpLocalization }}</h3>
+</ng-template>
+
+<ng-template #Author1>
+
+  <form [formGroup]="form" (ngSubmit)="save()">
+
+    <div class="mt-2">
+      <label for="book-name">Name</label><span> * </span>
+      <input type="text" id="book-name" class="form-control" formControlName="name" autofocus />
+    </div>
+    <div class="mt-2">
+      <label for="Author">Actions</label><span> * </span>
+      <input type="text" id="book-action" class="form-control" formControlName="action" autofocus />
+    </div>
+    <div class="mt-2">
+      <label>BirthDate</label><span> * </span>
+      <input #datepicker="ngbDatepicker" class="form-control" name="datepicker" formControlName="BirthDate"
+        ngbDatepicker (click)="datepicker.toggle()" />
+    </div>
+  </form>
+</ng-template>
+
+<ng-template #Author2>
+  <div id="id">
+    <button  type="button" (click)="close()" class="btn btn-secondary btn-lg float-right">
+        {{ '::Close' | abpLocalization }}
+    </button>
+    
+    <!--added save button-->
+    
+    <button  class="btn btn-primary btn-lg float-right" (click)="save()" [disabled]="form.invalid">
+          <i class="fa fa-check mr-1"></i>
+          {{ '::Save' | abpLocalization }}
+    </button>
+  </div>
+</ng-template>
